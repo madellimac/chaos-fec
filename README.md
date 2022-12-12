@@ -1,4 +1,4 @@
-# chaos en deux Séquences
+# Chaos en deux séquences
 Ce notebook contient trois modules décrits avec py_aff3ct :  
  - source  
  - add_impulses  
