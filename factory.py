@@ -50,7 +50,7 @@ class factory:
             dec = aff3ct.module.decoder.Decoder_polar_SCAN_naive_sys(self.K, self.N, self.I, frozen_bits)
 
         elif(self.code_type == "ldpc"):
-            esn0 = self.ebn0 + 10 * math.log10(K/N)
+            esn0 = self.ebn0 + 10 * math.log10(self.K/self.N)
             self.sigma_val = 1/(math.sqrt(2) * 10 ** (esn0 / 20))
 
             H   = tool_sp.alist.read("../py_aff3ct/lib/aff3ct/conf/dec/LDPC/WIMAX_288_576.alist")
