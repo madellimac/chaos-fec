@@ -4,7 +4,7 @@ import numpy as np
 import py_aff3ct as aff3ct
 from py_aff3ct.module.py_module import Py_Module
 
-class source(Py_Module):
+class conductor(Py_Module):
 
 	def generate(self, r_in, enable, delta_x, delta_y, ix_x, ix_y, x, y):
 		r_in[:] 	 = self.r_in[:]
@@ -22,7 +22,7 @@ class source(Py_Module):
 
 		Py_Module.__init__(self) # Call the aff3ct Py_Module __init__
 		
-		self.name   		= "source_xy"   
+		self.name   		= "conductor"   
 		self.r_in   		= r_in				
 		self.delta_x_range 	= np.arange(-4,4,0.05)
 		self.delta_y_range 	= np.arange(-4,4,0.05)
