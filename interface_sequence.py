@@ -1,11 +1,12 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog,QListWidget,QListWidgetItem,QMessageBox
+from PyQt5.QtWidgets import QFileDialog,QListWidget,QListWidgetItem,QMessageBox,QLabel
+from PyQt5.QtWidgets import QGridLayout,QMainWindow, QApplication, QLabel
 from pyqtgraph import PlotWidget
-
+from PyQt5.QtGui import QPixmap
 import sys
-sys.path.insert(0, '../pyaf/py_aff3ct/build/lib')
-#sys.path.insert(0, '/home/bekri/projetavanceS9/pyaf/py_aff3ct/build/lib')
+#sys.path.insert(0, '../pyaf/py_aff3ct/build/lib')
+sys.path.insert(0, '/home/bekri/projetavanceS9/pyaf/py_aff3ct/build/lib')
 import numpy as np
 import py_aff3ct as aff3ct
 import math
@@ -13,6 +14,7 @@ import time
 import matplotlib.pyplot as plt
 from datetime import timedelta
 from tempfile import TemporaryFile
+import os 
 
 from py_aff3ct.module.py_module import Py_Module
 import py_aff3ct.tools.frozenbits_generator as tool_fb
@@ -69,9 +71,20 @@ class Ui_MainWindow(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setObjectName("pushButton")
         self.pushButton.setGeometry(200, 300, 141, 25)
+        
+        self.checkBox_image = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBox_image.setObjectName("checkBox_image")
+        self.checkBox_image.setGeometry(200, 350, 180, 23)
+        
+        
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setObjectName("label_7")
         self.label_7.setGeometry(330, 40, 81, 17)
+        
+        
+        #self.labelpic.setObjectName("labelpic")
+        #self.labelpic.setGeometry(330, 40, 81, 17)
+        
         self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox.setObjectName("checkBox")
         self.checkBox.setGeometry(330, 80, 92, 23)
@@ -92,7 +105,9 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        
+        labelpic = QtWidgets.QLabel(self.centralwidget)
+        
         self.retranslateUi(MainWindow)
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -110,6 +125,7 @@ class Ui_MainWindow(object):
         #self.label_5.setText(_translate("MainWindow", "ebn0_max"))
         #self.label_6.setText(_translate("MainWindow", "ebn0_step"))
         self.pushButton.setText(_translate("MainWindow", "générer l'image"))
+        self.checkBox_image.setText(_translate("MainWindow", "sauvegarder l'image"))
         self.pushButton.clicked.connect(self.afficher_image)
         self.label_7.setText(_translate("MainWindow", "Code type"))
         self.checkBox.setText(_translate("MainWindow", "turbo"))
@@ -250,8 +266,36 @@ class Ui_MainWindow(object):
         seq2.export_dot("full_module.dot")
 
         seq2.exec()
+        #print("dis=",dis)
+        #print("dis.map=",dis)
+        #self.graphicsView.imshow(dis.map, interpolation='none')
         plt.imshow(dis.map, interpolation='none')
+        
+        if (self.checkBox_image.isChecked()): 
+            plt.savefig('chaosfig.png')
+            print("saved image")
+        #if (self.checkBox_image.isChecked()==0): 
+            #os.remove(r'chaosfig.png')
+            
+        
+            
+            
+        #self.im = QPixmap("/home/bekri/projetavanceS9/filename.jpeg")
+        #self.labelpic = QLabel()
+        #self.labelpic.setPixmap(self.im)
+
+        #self.grid = QGridLayout()
+        #self.grid.addWidget(self.labelpic,1,1)
+        
+
+        #self.centralwidget.setLayout(self.grid)
+        #self.labelpic.resize(self.centralwidget.pixmap.width(),self.centralwidget.pixmap.height())
+        #self.setWindowTitle("PyQT show image")
+        #self.show()
         plt.show()
+        #self.resize(200, 200)
+        #plt.show()
+        print("affichage reussie")
     
 if __name__ == "__main__":
     import sys
