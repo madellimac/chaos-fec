@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, '../pyaf/py_aff3ct/build/lib')
-import numpy as np
 import py_aff3ct as aff3ct
+# import numpy as np
 from py_aff3ct.module.py_module import Py_Module
 
 class add_impulses(Py_Module):

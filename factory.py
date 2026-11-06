@@ -10,7 +10,6 @@ import py_aff3ct.tools.sparse_matrix as tool_sp
 class factory:
 
     def build(self):
-
         if(self.code_type == "turbo"):
             
             esn0 = self.ebn0 + 10 * math.log10(self.K/self.N)
@@ -45,9 +44,9 @@ class factory:
             frozen_bits = fbgen.generate()
 
             enc  = aff3ct.module.encoder.Encoder_polar_sys      (self.K,self.N,frozen_bits)     # Build the encoder
-            #dec  = aff3ct.module.decoder.Decoder_polar_SC_fast_sys(K,N,frozen_bits)   # Build the decoder
-            #dec = aff3ct.module.decoder.Decoder_polar_SCL_MEM_fast_sys(K,N,8,frozen_bits)
-            dec = aff3ct.module.decoder.Decoder_polar_SCAN_naive_sys(self.K, self.N, self.I, frozen_bits)
+            dec  = aff3ct.module.decoder.Decoder_polar_SC_fast_sys(self.K,self.N,frozen_bits)   # Build the decoder
+            #dec = aff3ct.module.decoder.Decoder_polar_SCL_MEM_fast_sys(self.K,self.N,8,frozen_bits)
+            #dec = aff3ct.module.decoder.Decoder_polar_SCAN_naive_sys(self.K, self.N, self.I, frozen_bits)
 
         elif(self.code_type == "ldpc"):
             esn0 = self.ebn0 + 10 * math.log10(self.K/self.N)
@@ -82,4 +81,4 @@ class factory:
         self.ebn0 = ebn0
         self.I = I
 
-        print("init factory")
+        
